@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shop';
+  oddNumbers:number[] = [];
+  evenNumbers: number[] = [];
+
+  listenInterval(interval)
+{
+	if(interval%2==0)
+	{
+		this.evenNumbers.push(interval);
+	}
+	else
+	{
+		this.oddNumbers.push(interval); 
+	}
 }
+}	
+
