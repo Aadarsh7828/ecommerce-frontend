@@ -1,0 +1,213 @@
+<div id="page-container" class="page-header-dark main-content-boxed">
+    <!-- Main Container -->
+    <main id="main-container">
+
+       
+        <!-- Page Content -->
+        <div class="content">
+
+            <!-- Customers and Latest Orders -->
+            
+            <div class="block-header block-header-default">
+                <h3 class="block-title">All Orders</h3>
+                <div class="block-options">
+                    <div class="dropdown">
+                        <button type="button" class="btn-block-option" id="dropdown-ecom-filters" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filters <i class="fa fa-angle-down ml-1"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-ecom-filters">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                Pending..
+                                <span class="badge badge-secondary badge-pill">35</span>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                Processing
+                                <span class="badge badge-warning badge-pill">15</span>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                For Delivery
+                                <span class="badge badge-info badge-pill">20</span>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                Canceled
+                                <span class="badge badge-danger badge-pill">72</span>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                Delivered
+                                <span class="badge badge-success badge-pill">890</span>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                All
+                                <span class="badge badge-primary badge-pill">997</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- Search Form -->
+             <form action="be_pages_ecom_orders.html" method="POST" onsubmit="return false;">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-alt" id="one-ecom-orders-search" name="one-ecom-orders-search" placeholder="Search all orders..">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-body border-0">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- END Search Form -->
+             <!-- All Orders Table -->
+             <div class="table-responsive">
+                <table class="table table-bordered table-light table-striped table-vcenter">
+                    <thead class = "table-info">
+                        <tr>
+                            <th class="d-none d-sm-table-cell ">S.No.</th>
+                            <th class="d-none d-sm-table-cell ">First Name</th>
+                            <th class="d-none d-sm-table-cell ">Last Name</th>
+                            <th class="d-none d-xl-table-cell">Product</th>
+                            <th>Status</th>
+                            <th class="d-none d-xl-table-cell">Order date</th>
+                            <th class="d-none d-sm-table-cell">City</th>
+                            <th class="d-none d-xl-table-cell">State</th>
+                            <th class="d-none d-xl-table-cell ">Price</th>
+                            
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let order of orders;let i = index">
+                            <td class="text-center font-size-sm">
+                                {{i + 1 + offset}}
+                            </td>
+                            <td class="text-center font-size-sm">
+                                {{order.customer.firstName}}
+                            </td>
+                            <td class="d-none d-sm-table-cell font-size-sm">{{order.customer.lastName}}</td>
+                            <td class="d-none d-sm-table-cell font-size-sm">{{order.product.title}}</td>
+                            <td>
+                                <!-- <div class="dropdown"><a class="dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Processing</a>
+                                    <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
+                                      <button class="dropdown-item border-0 transition-link" (click) = "changeStatus('Processing')">Processing</button>
+                                      <button class="dropdown-item border-0 transition-link" (click) = "changeStatus('Received')">Received</button>
+                                      <button class="dropdown-item border-0 transition-link" (click) = "changeStatus('Accepted')">Accepted</button>
+                                      
+                                    </div>
+                                </div> -->
+                                {{order.orderStatus}}
+                            </td>
+                            <td class="d-none d-xl-table-cell font-size-sm">
+                                {{order.orderDate}}
+                            </td>
+                            <td class="d-none d-xl-table-cell font-size-sm">
+                                {{order.shippingCity}}
+                            </td>
+                            <td class="d-none d-xl-table-cell font-size-sm">
+                                {{order.shippingState}}
+                            </td>
+                            <td class="d-none d-sm-table-cell font-size-sm">
+                            {{order.product.attributes.price}}
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-alt-secondary" href="#" data-toggle="tooltip" title="View"
+                                data-toggle="modal" data-target="#edit-modal">
+                                    <i class="fa fa-fw fa-pencil-alt"></i>
+                                </a>
+                                <a class="btn btn-sm btn-alt-danger" href="javascript:void(0)" data-toggle="tooltip" title="Delete"
+                                data-toggle="modal" data-target="#delete-modal">
+                                    <i class="fa fa-fw fa-times text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+                <!-- PAGINATION-->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center justify-content-lg-end">
+              <li class = "page-item">
+                <button type ="button" class ="page-link" (click) = "firstPage()">
+                  <i class="lni lni-angle-double-left"></i>
+                </button>
+              </li>
+              <li class="page-item">
+                <button type = "button" class="page-link" (click) = "previousPage()">
+                  <i class="lni lni-chevron-left"></i>
+                </button>
+              </li>
+              <li class ="page-item">
+                <button type ="button" class ="page-link" (click) = "nextPage()">
+                  <i class="lni lni-chevron-right"></i>
+                </button>
+              </li>
+              <li class = "page-item">
+                <button type ="button" class ="page-link" (click) = "lastPage()">
+                  <i class="lni lni-angle-double-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+            </div>
+            <!-- END All Orders Table -->
+            
+            <!-- END Customers and Latest Orders -->
+        </div>
+
+
+
+        
+        <!-- END Page Content -->
+        
+         
+    </main>
+    <!-- END Main Container -->
+
+        
+</div>
+
+ <!-- Fade In Block Modal -->
+ <!-- Modal -->
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- END Fade In Block Modal -->    
+ <!-- Fade In Block Modal -->
+ <!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- END Fade In Block Modal -->    

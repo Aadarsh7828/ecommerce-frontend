@@ -1,0 +1,68 @@
+<!-- header starts -->
+<nav class="navbar navbar-light bg-light justify-content-between">
+	<a class="navbar-brand">City</a>
+	<form class="form-inline">
+	  <input ngModel #searchWord = "ngModel" name = "searchWord" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	  <!-- search button -->
+	  <button class="btn btn-outline-success my-2 my-sm-0" (click) = "performSearch(searchWord.value)"
+	   type="button"><i class="lni lni-keyword-research"></i></button> 
+	   <!-- reset button -->
+	  <button class="btn btn-outline-success my-2 my-sm-0" (click) = "resetSearch()"
+	  type="button"> <i class="lni lni-close"></i></button>
+	</form>
+  </nav>
+  <!-- header ends -->
+  
+  <!-- table section starts -->
+  <div class="table-responsive text">
+  <table class="table table-bordered">
+	<thead>
+	  <tr>
+		<th scope="col">S.No.</th>
+		<th scope="col">Name</th>
+		<th scope="col">State</th>
+
+	  </tr>
+	</thead>
+	<tbody> 	
+	  <tr *ngFor = "let city of currentViewList;let idx = index">
+		<th scope="row">{{idx+1 + offset}}</th>
+		<td>{{city.name}}</td>
+		<td>{{city.state}}</td>
+	  </tr>
+	</tbody>
+  </table>
+  </div>
+  <!-- table section ends -->
+  
+  <nav aria-label="Page navigation example">
+	  <div class = "row">
+		  <div class = "col">
+	<ul class="pagination justify-content-center">
+	  <li class = "page-item">
+		<button type ="button" class ="page-link" (click) = "firstPage()">
+		  <i class="lni lni-angle-double-left"></i>
+		</button>
+	  </li>
+	  <li class="page-item">
+		<button type = "button" class="page-link" (click) = "previousPage()">
+		  <i class="lni lni-chevron-left"></i>
+		</button>
+	  </li>
+	  <li class ="page-item">
+		<button type ="button" class ="page-link" (click) = "nextPage()">
+		  <i class="lni lni-chevron-right"></i>
+		</button>
+	  </li>
+	  <li class = "page-item">
+		<button type ="button" class ="page-link" (click) = "lastPage()">
+		  <i class="lni lni-angle-double-right"></i>
+		</button>
+	  </li>
+	</ul>
+  </div>
+	  </div>
+  </nav>
+  
+  
+  

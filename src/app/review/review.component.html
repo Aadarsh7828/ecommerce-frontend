@@ -1,0 +1,202 @@
+<div class ="container">
+    <div class="tab-pane fade active show" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab">
+      <div id="ratings-and-reviews" class="bg-white rounded shadow-sm p-4 mb-4 clearfix restaurant-detailed-star-rating">
+          <span class="star-rating float-right">
+                    <i class="lni lni-star-filled"></i>
+                    <i class="lni lni-star-filled"></i>
+                    <i class="lni lni-star-filled"></i>
+                    <i class="lni lni-star-filled"></i>
+                    <i class="lni lni-star-filled"></i>
+                    </span>
+          <h5 class="mb-0 pt-1">Rate this Product</h5>
+      </div>
+      <div *ngIf = "summary!= null" class="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating">
+          <h5 class="mb-0 mb-4">Ratings and Reviews</h5>
+          <div class="graph-star-rating-header">
+              <div class="star-rating">
+                  <i *ngFor = "let rating of getRatingInt()" class="lni lni-star-filled"></i>
+                  <!-- half star svg -->
+                  <i *ngIf = "hasFractionalPart()" class="fas fa-star-half"></i>
+                  <b class="text-black ml-2">{{getTotal()}}</b>
+              </div>
+              <p class="text-black mb-4 mt-2">Rated {{getNetRating()}} out of 5</p>
+          </div>
+          <div class="graph-star-rating-body">
+              <div class="rating-list">
+                  <div class="rating-list-left text-black">
+                      5 Star
+                  </div>
+                  <div class="rating-list-center">
+                      <div class="progress">
+                          <div [style.width.%] = "getRatingPercent('5')" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                              <span class="sr-only">80% Complete (danger)</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="rating-list-right text-black">{{getRatingPercent('5').toFixed(0)}}%</div>
+              </div>
+              <div class="rating-list">
+                  <div class="rating-list-left text-black">
+                      4 Star
+                  </div>
+                  <div class="rating-list-center">
+                      <div class="progress">
+                          <div [style.width.%] = "getRatingPercent('4')" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                              <span class="sr-only">80% Complete (danger)</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="rating-list-right text-black">{{getRatingPercent('4').toFixed(0)}}%</div>
+              </div>
+              <div class="rating-list">
+                  <div class="rating-list-left text-black">
+                      3 Star
+                  </div>
+                  <div class="rating-list-center">
+                      <div class="progress">
+                          <div [style.width.%] = "getRatingPercent('3')" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                              <span class="sr-only">80% Complete (danger)</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="rating-list-right text-black">{{getRatingPercent('3').toFixed(0)}}%</div>
+              </div>
+              <div class="rating-list">
+                  <div class="rating-list-left text-black">
+                      2 Star
+                  </div>
+                  <div class="rating-list-center">
+                      <div class="progress">
+                          <div [style.width.%] = "getRatingPercent('2')" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                              <span class="sr-only">80% Complete (danger)</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="rating-list-right text-black">{{getRatingPercent('2').toFixed(0)}}%</div>
+              </div>
+              <div class="rating-list">
+                <div class="rating-list-left text-black">
+                    1 Star
+                </div>
+                <div class="rating-list-center">
+                    <div class="progress">
+                        <div [style.width.%] = "getRatingPercent('1')" aria-valuemax="5" aria-valuemin="0" aria-valuenow="5" role="progressbar" class="progress-bar bg-primary">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rating-list-right text-black">{{getRatingPercent('1').toFixed(0)}}%</div>
+            </div>
+          </div>
+          <div class="graph-star-rating-footer text-center mt-3 mb-3">
+              <a href = "#write-review" class="btn btn-outline-primary btn-sm">Rate and Review</a>
+          </div>
+      </div>
+      <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
+          <!-- <a href="#" class="btn btn-outline-primary btn-sm float-right">Top Rated</a> -->
+          <div class="col-lg-6 float-right">
+            <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
+              <li class="list-inline-item">
+                <select class="selectpicker ml-auto" #sortOption (change) = "sortOrderChange(sortOption.value)" name="sorting" data-width="200" data-style="bs-select-form-control" data-title="Default sorting">
+                  <option value="default">All</option>
+                  <option value="RECENT">Recent</option>
+                  <option value="POSITIVE_FIRST">Postive First</option>
+                  <option value="NEGATIVE_FIRST">Negative First</option>
+                </select>
+              </li>
+            </ul>
+          </div>
+          <h5 class="mb-1">All Ratings and Reviews</h5>
+          
+          <div *ngFor ="let review of reviews" class="reviews-members pt-4 pb-4">
+              <div class="media">
+                  <img alt="profile picture" [src]="getProfilePicture(review.firstName)" class="mr-3 rounded-pill">
+                  <div class="media-body">
+                      <div class="reviews-members-header">
+                          <span class="star-rating float-right">
+                                <i *ngFor = "let rating of getRating(review.rating)" class="lni lni-star-filled active"></i>
+                                <!-- <i class="lni lni-star-filled active"></i>
+                                <i class="lni lni-star-filled active"></i>
+                                <i class="lni lni-star-filled active"></i>
+                                <i class="lni lni-star-filled"></i> -->
+                                </span>
+                          <h6 class="mb-1">{{review.firstName + " " + review.lastName}}</h6>
+                          <p class="text-gray mb-0">{{review.date.substr(0,10)}}</p>
+                          
+                      </div>
+                      <div class="reviews-members-body">
+                        <h5 class ="mb-2">{{review.summary}}</h5>
+                          <p>{{review.text}} </p>
+                      </div>
+                      <div class="reviews-members-footer float-right">
+                       <a href ="#" class = "like m-2 p-2" (click) = "likeClicked()"><i class="fas fa-thumbs-up"></i></a>
+                       <span id = "likeCount">10</span>
+                       <a href ="#" class = "dislike m-2 p-2" (click) = "dislikeClicked()"><i class="fas fa-thumbs-down"></i></a>
+                       <span id = "dislikeCount">1</span>
+                          <!-- <span class="total-like-user-main ml-2" dir="rtl">
+
+                                </span> -->
+                      </div>
+                  </div>
+              </div>
+              <hr>
+          </div>
+          
+          <!-- PAGINATION-->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center justify-content-lg-end">
+              <li class = "page-item">
+                <button type ="button" class ="page-link" (click) = "firstPage()">
+                  <i class="lni lni-angle-double-left"></i>
+                </button>
+              </li>
+              <li class="page-item">
+                <button type = "button" class="page-link" (click) = "previousPage()">
+                  <i class="lni lni-chevron-left"></i>
+                </button>
+              </li>
+              <li class ="page-item">
+                <button type ="button" class ="page-link" (click) = "nextPage()">
+                  <i class="lni lni-chevron-right"></i>
+                </button>
+              </li>
+              <li class = "page-item">
+                <button type ="button" class ="page-link" (click) = "lastPage()">
+                  <i class="lni lni-angle-double-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+      </div>
+      <div class="bg-white rounded shadow-sm p-4 mb-5 rating-review-select-page">
+          <span id ="write-review"></span>
+          <h5 class="mb-4">Write Review</h5>
+          <form ngForm #frm = "ngForm" (ngSubmit) = "submitReview(frm)">
+            <div class="form-group">
+                <label for="summary">Summary(in less than 40 words)</label>
+                <input type="email" ngModel name= "summary" class="form-control" id="summary" placeholder="Summary">
+              </div>
+              <div class="form-group">
+                  <label>Review</label>
+                  <textarea name= "text" ngModel class="form-control" placeholder = "description, your experience with product,quality, would you recommend to others, etc"></textarea>
+              </div>
+              <div class ="form-group">
+                <li  class="list-inline-item">
+                    <select ngModel name = "rating" class="selectpicker ml-auto" data-width="200" data-style="bs-select-form-control" data-title="Rating">
+                      
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </li>
+              </div>
+              <div class="form-group">
+                  <button class="btn btn-primary btn-sm" type="submit"> Submit Review </button>
+              </div>
+              
+          </form>
+      </div>
+    </div>
+    </div>

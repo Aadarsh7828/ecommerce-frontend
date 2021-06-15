@@ -1,0 +1,98 @@
+<!-- header starts -->
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand">Seller</a>
+  <form class="form-inline">
+    <input ngModel #searchWord = "ngModel" name = "searchWord" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" (click) = "performSearch(searchWord.value)"
+    type="button">Search</button>
+    <button class="btn btn-outline-success my-2 my-sm-0" (click) = "resetSearch()"
+    type="button"> reset</button>
+  </form>
+  <button class = "btn btn-info" data-toggle = "modal" data-target = "#confirmAddModal">Add</button>
+</nav>
+<!-- header ends -->
+
+
+<!-- table section starts -->
+<div class="table-responsive text-nowrap">
+<table class="table table-striped w-auto">
+  <thead>
+    <tr>
+      <th scope="col">S.No.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Contact Number</th>
+      <th scope="col">City</th>
+      <th scope="col">Pincode</th>
+      <th scope="col">Address</th>
+      <th scope="col">Birth Date</th>
+      <th scope="col">Id No.</th>
+      <th scope="col">Id Type</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody> 	
+    <tr *ngFor = "let seller of pageData;let idx = index">
+      <th scope="row">{{idx+1}}</th>
+      <td>{{seller.firstName}}</td>
+      <td>{{seller.lastName}}</td>
+      <td>{{seller.email}}</td>
+      <td>{{seller.gender}}</td>
+      <td>{{seller.contactNumber}}</td>
+      <td>{{seller.city}}</td>
+      <td>{{seller.pincode}}</td>
+      <td>{{seller.address}}</td>
+      <td>{{seller.dateOfBirth}}</td>
+      <td>{{seller.govId}}</td>
+      <td>{{seller.govIdType}}</td>
+      <td>
+      	<button type ="button" class = "btn btn-danger" data-toggle = "modal" data-target= "#confirmEditModal" 
+      			(click) = "editCategory(category.id)">Edit</button>
+      </td>
+      <td>
+      	<button type ="button" class = "btn btn-danger" data-toggle = "modal" 
+      					data-target = "#confirmDeleteCategory" (click) = "deleteCategory(category.id)">Delete
+      	</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- table section ends -->
+
+
+
+
+<nav aria-label="Page navigation example">
+	<div class = "row">
+		<div class ="col-2">
+<form>
+      <select ngModel #entry = "ngModel" (change) = "entryCountChange(entry.value)" name = "entryCount" 
+      class="custom-select" id="inlineFormCustomSelect">
+      <option selected value = "10">Choose...</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+      </select>
+</form>
+		</div>
+		<div class = "col-10">
+  <ul class="pagination justify-content-center">
+      <button type = "button" class="page-link" (click) = "previousPage()">
+      Previous
+  	  </button>
+    <li *ngFor = "let buttonCount of pageButtons" class="page-item" 
+    	[class.active] = "buttonActiveState(buttonCount)">
+    	<button type = "button" (click) = "pageButtonChanged(buttonCount)"class="page-link">{{buttonCount}}
+    	</button>
+    </li>
+    <li class="page-item">
+      <button type = "button" class="page-link" (click) = "nextPage()">Next</button>
+    </li>
+  </ul>
+</div>
+	</div>
+</nav>

@@ -1,0 +1,81 @@
+<!-- header starts -->
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">Customer</a>
+    <form class="form-inline">
+      <input ngModel #searchWord = "ngModel" name = "searchWord" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <!-- search button -->
+      <button class="btn btn-outline-success my-2 my-sm-0" (click) = "performSearch(searchWord.value)"
+       type="button"><i class="lni lni-keyword-research"></i></button> 
+       <!-- reset button -->
+      <button class="btn btn-outline-success my-2 my-sm-0" (click) = "resetSearch()"
+      type="button"> <i class="lni lni-close"></i></button>
+    </form>
+  </nav>
+  <!-- header ends -->
+  
+  <!-- table section starts -->
+  <div class="table-responsive text">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Date Of Birth</th>
+        <th scope="col">Date Of Joining</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col">Pincode</th>
+      </tr>
+    </thead>
+    <tbody> 	
+      <tr *ngFor = "let customer of currentViewList;let idx = index">
+        <td scope="row">{{idx+1 + offset}}</td>
+        <td>{{customer.firstName}}</td>
+        <td>{{customer.lastName}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.gender}}</td>
+        <td>{{customer.dateOfBirth}}</td>
+        <td>{{customer.dateOfJoining}}</td>
+        <td>{{customer.city}}</td>
+        <td>{{customer.state}}</td>
+        <td>{{customer.pincode}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <!-- table section ends -->
+  
+  <nav aria-label="Page navigation example">
+      <div class = "row">
+          <div class = "col">
+    <ul class="pagination justify-content-center">
+      <li class = "page-item">
+        <button type ="button" class ="page-link" (click) = "firstPage()">
+          <i class="lni lni-angle-double-left"></i>
+        </button>
+      </li>
+      <li class="page-item">
+        <button type = "button" class="page-link" (click) = "previousPage()">
+          <i class="lni lni-chevron-left"></i>
+        </button>
+      </li>
+      <li class ="page-item">
+        <button type ="button" class ="page-link" (click) = "nextPage()">
+          <i class="lni lni-chevron-right"></i>
+        </button>
+      </li>
+      <li class = "page-item">
+        <button type ="button" class ="page-link" (click) = "lastPage()">
+          <i class="lni lni-angle-double-right"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+      </div>
+  </nav>
+  
+  
+  

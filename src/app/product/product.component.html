@@ -1,0 +1,141 @@
+<!-- header starts -->
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">Products</a>
+    <form class="form-inline">
+      <input ngModel #searchWord = "ngModel" name = "searchWord" class="form-control mr-sm-2" type="search" placeholder="Search in Grocery" aria-label="Search">
+      <!-- search button -->
+      <button class="btn btn-outline-success my-2 my-sm-0" (click) = "performSearch(searchWord.value)"
+       type="button"><i class="lni lni-keyword-research"></i></button> 
+       <!-- reset button -->
+      <button class="btn btn-outline-success my-2 my-sm-0" (click) = "resetSearch()"
+      type="button"> <i class="lni lni-close"></i></button>
+    </form>
+  </nav>
+  <!-- header ends -->
+  
+  <!-- content panel starts-->
+  <div class = "container-fluid">
+      <div class = "row">
+      <!-- filter panel starts -->
+          <div class = "col-2"> 
+        
+            
+            <div class="col-md-3">
+                <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+                <hr>
+                
+                <!-- BEGIN FILTER BY CATEGORY -->
+                <h4>By category:</h4>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Application</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Design</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Desktop</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Management</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Mobile</label>
+                </div>
+                <!-- END FILTER BY CATEGORY -->
+                
+                <div class="padding"></div>
+                
+                <!-- BEGIN FILTER BY DATE -->
+                <h4>By date:</h4>
+                From
+                <div class="input-group date form_date" data-date="2014-06-14T05:25:07Z" data-date-format="dd-mm-yyyy" data-link-field="dtp_input1">
+                  <input type="text" class="form-control">
+                  <span class="input-group-addon bg-blue"><i class="fa fa-th"></i></span>
+                </div>
+                <input type="hidden" id="dtp_input1" value="">
+                
+                To
+                <div class="input-group date form_date" data-date="2014-06-14T05:25:07Z" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2">
+                  <input type="text" class="form-control">
+                  <span class="input-group-addon bg-blue"><i class="fa fa-th"></i></span>
+                </div>
+                <input type="hidden" id="dtp_input2" value="">
+                <!-- END FILTER BY DATE -->
+                
+                <div class="padding"></div>
+                
+                <!-- BEGIN FILTER BY PRICE -->
+                <h4>By price:</h4>
+                Between <div id="price1">$300</div> to <div id="price2">$800</div>
+                <div class="slider-primary">
+                  <div class="slider slider-horizontal" style="width: 152px;"><div class="slider-track"><div class="slider-selection" style="left: 30%; width: 50%;"></div><div class="slider-handle round" style="left: 30%;"></div><div class="slider-handle round" style="left: 80%;"></div></div><div class="tooltip top hide" style="top: -30px; left: 50.1px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">300 : 800</div></div><input type="text" class="slider" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="[300,800]" data-slider-tooltip="hide"></div>
+                </div>
+                <!-- END FILTER BY PRICE -->
+              </div>
+              <!-- END FILTERS -->
+
+
+
+          </div>
+      <!-- filter panel ends -->
+      <!-- product panel starts -->
+          <div class = "col-10">
+          
+        <div class="row">
+      <div *ngFor = "let product of products;index as idx" class="col-sm-6"> 	
+          <div class="card">
+              
+          <img class="card-img-top" [src]="getDisplayImage(idx)" alt="Card image cap" 
+          style="object-fit:contain;
+              width:200px;
+              height:300px;">
+              
+          <div class="card-block">
+        <h4 class="card-title">{{product.title}}</h4>
+        <p class="card-text">Occaecat ut consequat sed nostrud reprehenderit anim fugiat proident dolor in laboris aliquip incididunt.</p>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="card-link">Add to Cart</a>
+      <a href="#" class="card-link">Buy Now</a>
+      </div>
+      </div>
+  
+  
+          </div>
+      <!-- product panel ends -->
+      </div>
+  </div>
+  
+  <!-- content panel ends -->
+  
+  <nav aria-label="Page navigation example">
+      <div class = "row">
+          <div class = "col">
+    <ul class="pagination justify-content-center">
+      <li class = "page-item">
+        <button type ="button" class ="page-link" (click) = "firstPage()">
+          <i class="lni lni-angle-double-left"></i>
+        </button>
+      </li>
+      <li class="page-item">
+        <button type = "button" class="page-link" (click) = "previousPage()">
+          <i class="lni lni-chevron-left"></i>
+        </button>
+      </li>
+      <li class ="page-item">
+        <button type ="button" class ="page-link" (click) = "nextPage()">
+          <i class="lni lni-chevron-right"></i>
+        </button>
+      </li>
+      <li class = "page-item">
+        <button type ="button" class ="page-link" (click) = "lastPage()">
+          <i class="lni lni-angle-double-right"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+      </div>
+  </nav>
+  
+  
+  

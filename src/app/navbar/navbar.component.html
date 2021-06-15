@@ -1,0 +1,67 @@
+<header class="header bg-white">
+    <div class="container px-0 px-lg-3">
+      <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
+        
+        
+       
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+           
+            <li class="nav-item">
+              <!-- Link--><a class="nav-link" routerLink= "/shop">Shop</a>
+            </li>
+            
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+              <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
+                <a class="dropdown-item border-0 transition-link" routerLink = "/">Homepage</a>
+                <a class="dropdown-item border-0 transition-link" routerLink = "/my-orders">My Orders</a>
+                <!-- <a class="dropdown-item border-0 transition-link" >Product detail</a> -->
+                <a class="dropdown-item border-0 transition-link" routerLink = "/cart-items">Shopping cart</a>
+                <a class="dropdown-item border-0 transition-link" routerLink = "/checkout">Checkout</a>
+                <a class="dropdown-item border-0 transition-link" routerLink = "/customer-reg">SignUp</a>
+                <a class="dropdown-item border-0 transition-link" routerLink = "/seller-login">Seller login</a>
+                <a class="dropdown-item border-0 transition-link" routerLink = "/seller-order">Seller Orders</a>
+                <a class="dropdown-item border-0 transition-link" routerLink = "/manage-product">My Products</a>
+                <a class="dropdown-item border-0 transition-link" routerLink = "/sales-graph">Sales graph</a>
+              </div>
+            </li>
+          </ul>
+          <ul class = "navbar-nav ml-auto">
+            <!-- <li class = "nav-item ml-3 mr-3">
+              <a class="navbar-item" routerLink = "/home">
+                <span class="font-weight-bold text-uppercase text-dark">Ecommerce shop</span>
+               </a>
+            </li> -->
+            <li class = "nav-item">
+              <form  ngForm #frm = "ngForm" (ngSubmit) = "onSubmit(frm)">
+              <div class="input-group input-group">
+                <input type="text" ngModel class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="searchWord">
+                <div class="input-group-append">
+                    <span class="input-group-text bg-body border-0">
+                        <a href = "#" (click) = "onSubmit(frm)">
+                          <i class="fa fa-fw fa-search"></i>
+                        </a>
+                    </span>
+                </div>
+              </div>
+              </form>
+            </li> 
+            
+          </ul>
+          <ul class="navbar-nav ml-auto">               
+            
+            <li class="nav-item"><a class="nav-link" routerLink = "/cart-items"> <i class="lni lni-cart mr-1 text-gray"></i>Cart<small class="text-gray">({{cartItemCount}})</small></a></li>
+            <li class="nav-item"><a class="nav-link" href="#"> <i class="lni lni-heart mr-1"></i><small class="text-gray"> (0)</small></a></li>
+            <div *ngIf = "!isLoggedIn()">
+            <li class="nav-item"><a class="nav-link" routerLink = "/login"> <i class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
+            </div>
+            <div *ngIf ="isLoggedIn()">
+            
+              <li class="nav-item"><a class="nav-link" routerLink = "/logout"> <i class="fas fa-user-alt mr-1 text-gray"></i>Logout</a></li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
